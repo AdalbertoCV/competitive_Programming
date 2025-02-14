@@ -1,24 +1,19 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
 
 public class VocalsConsonantsCount {
 
-    public static void main(String[] args) {
-        String vocals = "aeiou";
-        String consonants = "bcdfghjklmnpqrstvwxyz";
-        Scanner in = new Scanner(System.in);
-        String text = in.nextLine();
-        in.close();
-        System.out.println("Number of vocals: " + String.valueOf(countOcurrences(text, vocals)));
-        System.out.println("Number of consonants: " + String.valueOf(countOcurrences(text, consonants)));
+    public static void main(String[] args) throws IOException {
+        String[] vocals = {"a","e","i","o","u"};
+        String[] consonants = {"b","c","d","f","g","h","j","k","l","m","n","ñ","p","q","r","s","t","v","w","x","y","z"};
+        String[] text = new BufferedReader(new InputStreamReader(System.in)).readLine().toLowerCase().split("");
+        System.out.println("Número de vocales en el texto: " + String.valueOf(countOcurrences(text, vocals)));
+        System.out.println("Número de consonantes en el texto: " + String.valueOf(countOcurrences(text, consonants)));
     }
 
-    public static int countOcurrences(String text, String charlist){
-        int cont = 0;
-        for (int i = 0; i < text.length(); i++){
-            if (charlist.contains(String.valueOf(text.charAt(i)))){
-                cont++;
-            }
-        }
-        return cont;
+    public static Long countOcurrences(String[] text, String[] charlist){
+        return Arrays.stream(text).filter(character -> Arrays.stream(charlist).anyMatch(x -> x.equalsIgnoreCase(character))).count();
     }
 }

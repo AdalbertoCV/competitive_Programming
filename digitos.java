@@ -4,6 +4,7 @@ public class digitos{
 		Scanner t = new Scanner(System.in);
 		
 		int n = t.nextInt();
+		t.close();
 		
 		String result;
 		double res = Math.pow(3 + Math.sqrt(5), n);
